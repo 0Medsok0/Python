@@ -3,16 +3,10 @@ import json
 import re
 import soupsieve as sv
 
-
-
-
 with open('html/Авито.html', 'r') as f: # открываем файл 
   soup = BeautifulSoup(f, 'lxml')
   
-#print(soup)
-
-
-#!! Достаем цену квартиры
+#Достаем цену квартиры
 data_1 = {}
 spans_in_strong = soup.find_all('strong', class_='styles-module-root-LIAav')
 for i in range(len(spans_in_strong)):
@@ -22,7 +16,6 @@ for i in range(len(spans_in_strong)):
   else:
     data_1[spans_in_strong[i].get_text()] = "No next sibling found"
 
-  
 # Достаем цену квартиры за метр.кв
 
 data_2 = {}
@@ -51,16 +44,5 @@ for link in links:
     item_url = link.get("href")
     data_5[(f"{i_text}")] = f"{item_url}"
     
-# all_a = soup.find_all("a")
-# print(all_a)
-#
-# for item in all_a:
-#     item_text = item.text
-#     item_url = item.get("href")
-#     print(f"{item_text}: {item_url}")
-    
-    
-
-
 with open("data.json", "w") as file:
     json.dump((data_1,data_2,data_3,data_4,data_5), file, indent=4, ensure_ascii=False)
