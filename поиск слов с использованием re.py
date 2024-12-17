@@ -19,7 +19,6 @@ def search_keywords(filename, keywords):
           results.append((keyword, line_number))
   return results
 
-# Example usage:
 keywords_to_search = ['function', 'class', 'import']
 file_to_search = 'your_file.py'
 found_keywords = search_keywords(file_to_search, keywords_to_search)
